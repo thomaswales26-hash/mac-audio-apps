@@ -238,6 +238,24 @@
   .note svg{width:18px;height:18px;flex:none;color:#facc15;margin-top:2px}
   .note b{color:#fff}
 
+  /* ---------- support / buy me a coffee ---------- */
+  .coffee{
+    display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:space-between;
+    border:1px solid rgba(255,221,0,.22);border-radius:20px;padding:26px 28px;margin-bottom:18px;
+    background:linear-gradient(100deg,rgba(255,221,0,.08),rgba(255,90,82,.05));
+  }
+  .coffee h4{margin:0 0 6px;font-size:17px;letter-spacing:-.01em}
+  .coffee p{margin:0;font-size:14px;color:var(--muted);max-width:460px}
+  .coffee .cup{display:flex;align-items:center;gap:14px}
+  .coffee .cup svg{width:34px;height:34px;color:#ffdd00;flex:none}
+  .btn-coffee{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:15px;
+    padding:13px 24px;border-radius:13px;background:#ffdd00;color:#1a1400;
+    transition:transform .18s,box-shadow .18s;white-space:nowrap;
+  }
+  .btn-coffee:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(255,221,0,.28)}
+  .btn-coffee svg{width:17px;height:17px}
+
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line);padding:44px 0 56px;color:var(--dim);font-size:13.5px}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
@@ -470,6 +488,23 @@
     </div>
   </section>
 
+  <!-- SUPPORT -->
+  <section class="section wrap" id="support" style="padding-bottom:56px">
+    <div class="coffee reveal">
+      <div class="cup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M7 3v2"/><path d="M11 3v2"/></svg>
+        <div>
+          <h4>Both apps are free. Buy me a coffee if they earn their keep.</h4>
+          <p>No accounts, no telemetry, no ads — just a couple of small tools I built for myself. A coffee keeps the next update coming.</p>
+        </div>
+      </div>
+      <a class="btn-coffee" href="https://www.buymeacoffee.com/thomaswales26hash" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/></svg>
+        Buy me a coffee
+      </a>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -482,6 +517,7 @@
       <a href="#apps">Apps</a>
       <a href="#formats">Formats</a>
       <a href="#install">How to install</a>
+      <a href="#support">Buy me a coffee</a>
     </div>
   </div>
 </footer>
