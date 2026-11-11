@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Soundcard Recorder &amp; Dance Box Radio — Mac apps</title>
-<meta name="description" content="Two native Mac apps: Soundcard Recorder captures your Mac's system audio to MP3, AAC, FLAC or ALAC. Dance Box Radio plays and records 535 live dance stations. Free DMG downloads.">
+<title>Soundcard Recorder, Dance Box Radio &amp; RipKit — Mac apps</title>
+<meta name="description" content="Three native Mac apps: Soundcard Recorder captures your Mac's system audio, Dance Box Radio plays and records 535 live dance stations, and RipKit backs up Blu-ray and DVD discs to MKV. Free DMG downloads.">
 <link rel="icon" href="img/soundcard-160.png">
 <link rel="apple-touch-icon" href="img/soundcard-icon.png">
 <style>
@@ -135,6 +135,7 @@
     padding:5px 11px;border-radius:999px;margin-bottom:18px;font-weight:600}
   .badge-red{color:#ffb4ae;background:rgba(255,90,82,.13);border:1px solid rgba(255,90,82,.3)}
   .badge-teal{color:#9ff0ea;background:rgba(49,201,192,.12);border:1px solid rgba(49,201,192,.3)}
+  .badge-violet{color:#c9b8ff;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35)}
   .app-title{display:flex;align-items:center;gap:18px;margin-bottom:16px}
   .app-title img{width:84px;height:84px;border-radius:20px;box-shadow:0 14px 34px rgba(0,0,0,.55);flex:none}
   .app-title h3{margin:0;font-size:28px;letter-spacing:-.03em;line-height:1.1}
@@ -278,7 +279,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top"><img src="img/soundcard-160.png" alt=""> Mac Audio Apps</a>
+    <a class="brand" href="#top"><img src="img/soundcard-160.png" alt=""> Mac Apps</a>
     <nav class="nav-links">
       <a href="#apps">Apps</a>
       <a href="#formats">Formats</a>
@@ -292,9 +293,9 @@
 
   <!-- HERO -->
   <section class="hero wrap">
-    <div class="eyebrow"><span class="dot"></span> Free DMG downloads · macOS 14+ · Apple silicon</div>
-    <h1>Two small Mac apps<br>that <span class="grad">capture and play</span><br>your music.</h1>
-    <p class="lede">Soundcard Recorder saves everything your Mac plays as a real audio file. Dance Box Radio streams 535 live dance stations and records them on the spot. No accounts, no telemetry, no microphone.</p>
+    <div class="eyebrow"><span class="dot"></span> Free DMG downloads · macOS 12+ · Apple silicon</div>
+    <h1>Three small Mac apps<br>that <span class="grad">capture, play</span><br>and back up your discs.</h1>
+    <p class="lede">Soundcard Recorder saves everything your Mac plays as a real audio file. Dance Box Radio streams 535 live dance stations and records them on the spot. RipKit backs up Blu-ray and DVD discs to MKV and compresses them. No accounts, no telemetry.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#apps">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
@@ -305,12 +306,13 @@
     <div class="hero-icons">
       <img src="img/soundcard-icon.png" alt="Soundcard Recorder app icon">
       <img src="img/dancebox-icon.png" alt="Dance Box Radio app icon">
+      <img src="img/ripkit-icon.png" alt="RipKit app icon">
     </div>
   </section>
 
   <div class="wrap">
     <div class="stats reveal">
-      <div class="stat"><b>2</b><span>Native Mac apps</span></div>
+      <div class="stat"><b>3</b><span>Native Mac apps</span></div>
       <div class="stat"><b>4</b><span>Recording formats</span></div>
       <div class="stat"><b>535</b><span>Live radio stations</span></div>
       <div class="stat"><b>0</b><span>Microphone access</span></div>
@@ -321,8 +323,8 @@
   <section class="section wrap" id="apps">
     <div class="sec-head reveal">
       <div class="kicker">The apps</div>
-      <h2>Pick one, drag it to Applications, start recording.</h2>
-      <p>Both are built in Swift for Apple silicon Macs, ship as a single DMG, and keep every file on your own disk.</p>
+      <h2>Pick one, drag it to Applications, go.</h2>
+      <p>All three are built in Swift for Apple silicon Macs, ship as a single DMG, and keep every file on your own disk.</p>
     </div>
 
     <!-- Soundcard Recorder -->
@@ -433,6 +435,54 @@
         </div>
       </div>
     </article>
+
+    <!-- RipKit -->
+    <article class="app reveal">
+      <div class="app-top">
+        <div class="app-info">
+          <span class="app-badge badge-violet">Blu-ray &amp; DVD ripper</span>
+          <div class="app-title">
+            <img src="img/ripkit-icon.png" alt="RipKit icon">
+            <div>
+              <h3>RipKit</h3>
+              <div class="ver">Version 1.0 · arm64 · macOS 12.0+</div>
+            </div>
+          </div>
+          <p class="app-desc">Backs up Blu-ray and DVD discs to MKV with your own decryption keys, then compresses the result with bundled HandBrake and ffmpeg. Everything it needs ships inside the app — no Homebrew, no installs.</p>
+          <ul class="feat">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> makemkvcon, HandBrakeCLI and ffmpeg bundled inside</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Your keydb.cfg, .dvdcss keys and licence key, saved and backed up</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Live rip progress bar with retry if the drive drops off USB</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Rips to a per-disc folder with the MakeMKV log kept beside it</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> x265 compression with quality, audio and subtitle options</li>
+          </ul>
+          <div class="app-actions">
+            <a class="dl" href="downloads/RipKit-1.0.dmg" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              Download DMG
+            </a>
+            <span class="dl-meta">65 MB · v1.0 · arm64</span>
+          </div>
+        </div>
+
+        <div class="app-visual">
+          <div class="win">
+            <div class="win-bar"><i class="tl r"></i><i class="tl y"></i><i class="tl g"></i><span>RipKit</span></div>
+            <div class="win-body">
+              <div class="mock-title">RipKit</div>
+              <div class="mock-sub">CLASH_OF_THE_TITANS_2010 · Drive 0</div>
+              <div class="mock-row"><span class="chip">Scan Disc</span><span class="chip on">Rip &amp; Compress</span></div>
+              <div class="mock-timer" style="font-size:26px">Ripping… 42%</div>
+              <div class="bars" style="height:10px"><i style="height:100%;flex:42;animation:none"></i><i style="height:100%;flex:58;opacity:.25;animation:none;background:#3a4152"></i></div>
+              <div class="mock-sub">Title 0 · 1:41:38 · 4 GB cache · keydb.cfg loaded</div>
+              <div class="mock-row" style="margin:14px 0 0">
+                <span class="chip">keydb.cfg ✓</span><span class="chip">DVD keys</span><span class="chip">MKV → x265</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </section>
 
   <!-- FORMATS -->
@@ -471,7 +521,7 @@
     <div class="steps reveal">
       <div class="step">
         <h4>Download the DMG</h4>
-        <p>Grab either app above. The disk image contains the app and an Applications shortcut.</p>
+        <p>Grab any app above. The disk image contains the app — drag it to Applications.</p>
       </div>
       <div class="step">
         <h4>Drag it to Applications</h4>
@@ -484,7 +534,7 @@
     </div>
     <div class="note reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
-      <div><b>Requirements:</b> Soundcard Recorder needs macOS 14.2 or newer. Dance Box Radio needs macOS 14.4 or newer on an Apple silicon (arm64) Mac, because it uses system-audio capture. Neither app opens the microphone.</div>
+      <div><b>Requirements:</b> Soundcard Recorder needs macOS 14.2 or newer. Dance Box Radio needs macOS 14.4 or newer on an Apple silicon (arm64) Mac. RipKit needs macOS 12.0 or newer on Apple silicon. Neither audio app opens the microphone.</div>
     </div>
   </section>
 
@@ -494,7 +544,7 @@
       <div class="cup">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M7 3v2"/><path d="M11 3v2"/></svg>
         <div>
-          <h4>Both apps are free. Buy me a coffee if they earn their keep.</h4>
+          <h4>All three apps are free. Buy me a coffee if they earn their keep.</h4>
           <p>No accounts, no telemetry, no ads — just a couple of small tools I built for myself. A coffee keeps the next update coming.</p>
         </div>
       </div>
@@ -510,7 +560,7 @@
 <footer>
   <div class="wrap foot">
     <div>
-      <a class="brand" href="#top"><img src="img/soundcard-160.png" alt=""> Mac Audio Apps</a>
+      <a class="brand" href="#top"><img src="img/soundcard-160.png" alt=""> Mac Apps</a>
       <div style="margin-top:10px">Made for macOS. Everything stays on your Mac.</div>
     </div>
     <div>
