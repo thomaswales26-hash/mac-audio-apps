@@ -5,7 +5,20 @@ The download page for two native macOS apps:
 - **Soundcard Recorder** — records your Mac's system audio to MP3, AAC, FLAC or ALAC, never the microphone.
 - **Dance Box Radio** — 535 live dance radio stations from 98 countries, with a one-click recorder.
 
-Published with GitHub Pages from `docs/`.
+**Live:** https://thomaswales26-hash.github.io/mac-audio-apps/
+
+## How it is published
+
+GitHub Pages serves this repository's `main` branch from the root:
+
+- `index.html` — the page
+- `img/` — app icons
+- `downloads/` — the two DMG installers
+- `.nojekyll` — tells Pages to serve the files as they are instead of running
+  them through Jekyll
+
+To update the site, change the files, commit and push to `main`. Pages rebuilds
+in under a minute.
 
 ## Local preview
 
@@ -14,18 +27,8 @@ Published with GitHub Pages from `docs/`.
 ./server/site.sh stop
 ```
 
-or just open `docs/index.html` in a browser.
-
-## Structure
-
-```
-docs/              the published site (GitHub Pages serves this folder)
-  index.html
-  img/             app icons
-  downloads/       the two DMG installers
-site/              working copy of the same site
-server/            optional local Apache setup for serving it on your LAN
-```
+The Apache config in `server/` serves this folder on your own Wi-Fi; see
+`server/README.md`. `server/` is not part of the published page.
 
 ## Requirements
 
