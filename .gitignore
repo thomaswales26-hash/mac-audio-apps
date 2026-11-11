@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# The app's own state, backups and server runtime
+.abacusai-bot/
+server/run/httpd.pid
+server/run/*.log
+
+# App sources and build output — this repo is only the download page
+SoundCardRecorder/

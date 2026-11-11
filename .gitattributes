@@ -1,0 +1,4 @@
+# Installers are binary: never diff them or convert line endings
+*.dmg binary
+*.png binary
+*.icns binary
