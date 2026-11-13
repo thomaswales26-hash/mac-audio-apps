@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, net } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain, net } = require('electron')
 const { spawn } = require('node:child_process')
 const fs = require('node:fs/promises')
 const http = require('node:http')
@@ -160,6 +160,10 @@ function showMainWindow() {
   if (!mainWindow || mainWindow.isDestroyed()) return false
 
   if (mainWindow.isMinimized()) mainWindow.restore()
+  if (isMac) {
+    void app.dock.show()
+    app.focus({ steal: true })
+  }
   mainWindow.show()
   mainWindow.focus()
   return true
@@ -197,6 +201,7 @@ async function createWindow() {
   })
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
   await window.loadURL(localOrigin)
+  showMainWindow()
 }
 
 app
@@ -207,6 +212,7 @@ app
   })
   .catch((error) => {
     console.error(error)
+    dialog.showErrorBox('Open Passage could not start', error.message)
     app.quit()
   })
 
