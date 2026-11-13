@@ -54,6 +54,7 @@ jobs:
       - name: Build PKG
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
+          FIGMA_EID: ${{ secrets.FIGMA_EID }}
         run: pnpm package:mac:${{ matrix.arch }}
 
       - name: Upload PKG
