@@ -1,0 +1,91 @@
+{
+  "name": "shieldwall-popup-blocker",
+  "productName": "Shieldwall",
+  "version": "1.0.0",
+  "description": "A privacy-first cross-browser popup and ad blocker for macOS.",
+  "author": "Thomas Wales",
+  "license": "MIT",
+  "private": true,
+  "main": "app/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check app/main.cjs && node --check app/preload.cjs && node --check app/renderer.js",
+    "package:mac": "electron-builder --mac dmg pkg --publish never",
+    "package:mac:x64": "electron-builder --mac dmg pkg --x64 --publish never",
+    "package:mac:arm64": "electron-builder --mac dmg pkg --arm64 --publish never",
+    "package:mac:universal": "electron-builder --mac dmg pkg --universal --publish never"
+  },
+  "devDependencies": {
+    "electron": "^45.3.1",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.thomaswales.shieldwall",
+    "productName": "Shieldwall",
+    "copyright": "Copyright © 2026 Thomas Wales",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "app/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "extensions",
+        "to": "extensions",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "build/icon.png",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "target": [
+        "dmg",
+        "pkg"
+      ]
+    },
+    "dmg": {
+      "title": "Shieldwall ${version}",
+      "icon": "build/icon.png",
+      "backgroundColor": "#0b0e13",
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 140,
+          "y": 190,
+          "type": "file"
+        },
+        {
+          "x": 400,
+          "y": 190,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "pkg": {
+      "allowAnywhere": false,
+      "allowCurrentUserHome": true,
+      "allowRootDirectory": true,
+      "installLocation": "/Applications"
+    },
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron"
+    ]
+  }
+}

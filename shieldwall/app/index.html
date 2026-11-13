@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:"
+    />
+    <title>Shieldwall</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="traffic-space" aria-hidden="true"></div>
+        <a class="brand" href="#overview" data-page-link="overview">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.5 20 6v5.7c0 5-3.3 8.5-8 10.3-4.7-1.8-8-5.3-8-10.3V6l8-3.5Z" />
+              <path d="m8.2 12 2.3 2.3 5.3-5.4" />
+            </svg>
+          </span>
+          <span><strong>Shieldwall</strong><small>Popup protection</small></span>
+        </a>
+
+        <nav>
+          <p class="nav-label">Protection</p>
+          <button class="nav-item active" data-page="overview">
+            <svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 1 1 16 0v6H4v-6Z"/><path d="M9 19v-6a3 3 0 0 1 6 0v6"/></svg>
+            Overview
+          </button>
+          <button class="nav-item" data-page="browsers">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M8 21c3-3.3 4.2-7 3.8-11.8M16 21c-2.1-2.4-3.3-5-3.7-8"/></svg>
+            Browsers
+          </button>
+          <p class="nav-label nav-label-spaced">System</p>
+          <button class="nav-item" data-page="privacy">
+            <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            Privacy
+          </button>
+        </nav>
+
+        <div class="sidebar-foot">
+          <span class="status-dot"></span>
+          <div><strong>Local only</strong><small>No browsing data collected</small></div>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="page-eyebrow">Protection overview</p>
+            <h1 id="page-title">Good afternoon</h1>
+          </div>
+          <div class="header-actions">
+            <span class="version-pill">Desktop controller</span>
+            <button class="power-button" data-go-page="browsers">
+              <svg viewBox="0 0 24 24"><path d="M5 18 19 6M7 6h12v12"/></svg>
+              <span>Set up browsers</span>
+            </button>
+          </div>
+        </header>
+
+        <section id="overview" class="page active">
+          <div class="hero-card">
+            <div class="shield-orbit">
+              <span class="orbit orbit-one"></span>
+              <span class="orbit orbit-two"></span>
+              <span class="hero-shield">
+                <svg viewBox="0 0 24 24"><path d="M12 2.5 20 6v5.7c0 5-3.3 8.5-8 10.3-4.7-1.8-8-5.3-8-10.3V6l8-3.5Z"/><path d="m8.2 12 2.3 2.3 5.3-5.4"/></svg>
+              </span>
+            </div>
+            <div class="hero-copy">
+              <span class="protected-label"><i></i> Ready to protect</span>
+              <h2>Quiet browsing,<br />without the tracking.</h2>
+              <p>Install the bundled extension in each browser. Shieldwall then blocks popup windows, popunders, redirect traps, disruptive overlays, and known advertising requests.</p>
+              <button class="primary-button" data-go-page="browsers">Set up browser extensions</button>
+            </div>
+            <div class="hero-grid" aria-hidden="true"></div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <div class="metric-icon mint"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></div>
+              <div><span class="metric-value">0</span><span class="metric-label">Desktop events reported</span></div>
+              <span class="metric-note">Browser counts stay in each extension</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-icon blue"><svg viewBox="0 0 24 24"><path d="M5 18 19 6M7 6h12v12"/></svg></div>
+              <div><span class="metric-value" id="browser-count">0 / 2</span><span class="metric-label">Browser packages marked installed</span></div>
+              <span class="metric-note">Chromium and Firefox</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-icon amber"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg></div>
+              <div><span class="metric-value">37</span><span class="metric-label">Network rules</span></div>
+              <span class="metric-note">Focused ad and redirect domains</span>
+            </article>
+          </div>
+
+          <div class="section-heading">
+            <div><p class="eyebrow">Protection layers</p><h2>Built into each extension</h2></div>
+            <span>Control protection from the browser toolbar</span>
+          </div>
+          <div class="setting-list">
+            <label class="setting-row">
+              <span class="setting-symbol coral"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m9 10 6 6M15 10l-6 6"/></svg></span>
+              <span class="setting-copy"><strong>Popup and popunder windows</strong><small>Stops scripted windows that are not opened by a trusted click.</small></span>
+              <span class="layer-enabled">Included</span>
+            </label>
+            <label class="setting-row">
+              <span class="setting-symbol violet"><svg viewBox="0 0 24 24"><path d="M5 7h10l4 4-4 4H5"/><path d="m15 7 4 4-4 4"/></svg></span>
+              <span class="setting-copy"><strong>Redirect traps</strong><small>Blocks known redirect services and suspicious automatic navigation.</small></span>
+              <span class="layer-enabled">Included</span>
+            </label>
+            <label class="setting-row">
+              <span class="setting-symbol blue"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16"/><path d="M8 7h.01"/></svg></span>
+              <span class="setting-copy"><strong>Page-covering overlays</strong><small>Removes high-confidence ad overlays while leaving ordinary dialogs alone.</small></span>
+              <span class="layer-enabled">Included</span>
+            </label>
+            <label class="setting-row">
+              <span class="setting-symbol mint"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4a13 13 0 0 1 0 16M12 4a13 13 0 0 0 0 16"/></svg></span>
+              <span class="setting-copy"><strong>Advertising and tracking requests</strong><small>Uses browser-native filtering rules for common ad and tracker domains.</small></span>
+              <span class="layer-enabled">Included</span>
+            </label>
+          </div>
+        </section>
+
+        <section id="browsers" class="page">
+          <div class="intro-card">
+            <div><p class="eyebrow">One manual step per browser</p><h2>Install the bundled extensions</h2><p>Browsers require you to approve extensions yourself. Shieldwall reveals the correct folder and gives you the exact steps; it never changes browser policy behind your back.</p></div>
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M8 18v2M16 18v2M7 10h10"/></svg>
+          </div>
+          <div class="browser-grid">
+            <article class="browser-card">
+              <div class="browser-top"><span class="browser-logo chromium">C</span><div><h3>Chrome, Edge, Brave, Vivaldi</h3><p>Manifest V3 package</p></div><span class="install-state" data-browser-state="chromium">Not marked installed</span></div>
+              <ol><li>Click <b>Reveal extension folder</b>.</li><li>Open your browser's extensions page and enable Developer mode.</li><li>Choose <b>Load unpacked</b>, then select the revealed Chromium folder.</li></ol>
+              <div class="browser-actions"><button class="primary-button" data-reveal="chromium">Reveal extension folder</button><button class="secondary-button" data-help="chromium">Open installation guide</button></div>
+              <label class="installed-check"><input type="checkbox" data-installed="chromium" /> I installed this extension</label>
+            </article>
+            <article class="browser-card">
+              <div class="browser-top"><span class="browser-logo firefox">F</span><div><h3>Firefox</h3><p>Firefox Manifest V3 package</p></div><span class="install-state" data-browser-state="firefox">Not marked installed</span></div>
+              <ol><li>Click <b>Reveal extension folder</b>.</li><li>Open <b>about:debugging</b>, then This Firefox.</li><li>Choose <b>Load Temporary Add-on</b> and select manifest.json.</li></ol>
+              <div class="browser-actions"><button class="primary-button" data-reveal="firefox">Reveal extension folder</button><button class="secondary-button" data-help="firefox">Open installation guide</button></div>
+              <label class="installed-check"><input type="checkbox" data-installed="firefox" /> I installed this extension</label>
+            </article>
+          </div>
+          <div class="notice"><strong>Why installation is manual</strong><p>Chrome Web Store and Firefox Add-ons signing are separate publishing processes. This package includes inspectable source extensions, but macOS apps cannot silently install them into your browser.</p></div>
+        </section>
+
+        <section id="privacy" class="page">
+          <div class="privacy-hero">
+            <span><svg viewBox="0 0 24 24"><path d="M12 2.5 20 6v5.7c0 5-3.3 8.5-8 10.3-4.7-1.8-8-5.3-8-10.3V6l8-3.5Z"/><path d="M9 12h6M12 9v6"/></svg></span>
+            <p class="eyebrow">Privacy by design</p>
+            <h2>Your browsing history never enters this app.</h2>
+            <p>Shieldwall stores only the browser installation checkmarks you set in this controller. Protection settings, site allowlists, and block counters stay inside each browser profile.</p>
+          </div>
+          <div class="privacy-grid">
+            <article><strong>No account</strong><p>No sign-in, cloud sync, advertising identifier, or analytics SDK.</p></article>
+            <article><strong>No HTTPS interception</strong><p>Shieldwall does not install a root certificate or inspect passwords and private page content.</p></article>
+            <article><strong>Browser-native filtering</strong><p>Network requests are blocked with declarative browser rules rather than a man-in-the-middle proxy.</p></article>
+            <article><strong>Settings stay local</strong><p>The controller writes one small JSON file in its macOS application-data folder.</p></article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
