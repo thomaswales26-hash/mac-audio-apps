@@ -1,0 +1,46 @@
+{
+  "name": "open-passage-desktop",
+  "productName": "Open Passage",
+  "version": "1.0.0",
+  "description": "A macOS VPN Gate profile client for Tunnelblick and OpenVPN Connect.",
+  "main": "electron/main.cjs",
+  "author": "Open Passage",
+  "license": "MIT",
+  "build": {
+    "appId": "com.openpassage.vpngate",
+    "electronVersion": "45.3.1",
+    "productName": "Open Passage",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "asar": true,
+    "asarUnpack": [
+      ".next/standalone/**/*"
+    ],
+    "directories": {
+      "output": "../release",
+      "buildResources": "desktop"
+    },
+    "files": [
+      ".next/standalone/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "mac": {
+      "category": "public.app-category.utilities",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "icon": "desktop/icon.png",
+      "entitlements": "desktop/entitlements.mac.plist",
+      "entitlementsInherit": "desktop/entitlements.mac.plist",
+      "target": [
+        "pkg"
+      ]
+    },
+    "pkg": {
+      "allowAnywhere": false,
+      "allowCurrentUserHome": true,
+      "allowRootDirectory": true,
+      "installLocation": "/Applications"
+    }
+  }
+}

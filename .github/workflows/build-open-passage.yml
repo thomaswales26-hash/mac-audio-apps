@@ -1,0 +1,85 @@
+name: Build Open Passage macOS PKGs
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "open-passage-v*"
+
+jobs:
+  build:
+    name: Build ${{ matrix.arch }}
+    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        arch:
+          - arm64
+          - x64
+
+    defaults:
+      run:
+        working-directory: open-passage
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: pnpm
+          cache-dependency-path: open-passage/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate source
+        run: |
+          pnpm exec tsc --noEmit
+          node --check electron/main.cjs
+          node --check electron/preload.cjs
+          node --check scripts/prepare-desktop.mjs
+          node --check scripts/package-desktop.mjs
+
+      - name: Build PKG
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: pnpm package:mac:${{ matrix.arch }}
+
+      - name: Upload PKG
+        uses: actions/upload-artifact@v4
+        with:
+          name: Open-Passage-macOS-${{ matrix.arch }}
+          path: open-passage/release/*.pkg
+          if-no-files-found: error
+
+  release:
+    name: Publish Open Passage release
+    if: startsWith(github.ref, 'refs/tags/open-passage-v')
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download installers
+        uses: actions/download-artifact@v4
+        with:
+          pattern: Open-Passage-macOS-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Open Passage 1.0.0
+          generate_release_notes: true
+          files: release-assets/*.pkg
