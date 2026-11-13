@@ -13,6 +13,7 @@ const allowedClients = new Map([
 
 let localServer
 let localOrigin
+let mainWindow
 
 function getFreePort() {
   return new Promise((resolve, reject) => {
@@ -155,7 +156,18 @@ function registerIPC() {
   })
 }
 
+function showMainWindow() {
+  if (!mainWindow || mainWindow.isDestroyed()) return false
+
+  if (mainWindow.isMinimized()) mainWindow.restore()
+  mainWindow.show()
+  mainWindow.focus()
+  return true
+}
+
 async function createWindow() {
+  if (showMainWindow()) return
+
   await startLocalServer()
 
   const window = new BrowserWindow({
@@ -176,9 +188,15 @@ async function createWindow() {
     },
   })
 
+  mainWindow = window
+  window.on('closed', () => {
+    if (mainWindow === window) mainWindow = undefined
+  })
+  window.once('ready-to-show', () => {
+    if (mainWindow === window) showMainWindow()
+  })
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
   await window.loadURL(localOrigin)
-  window.once('ready-to-show', () => window.show())
 }
 
 app
@@ -197,9 +215,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    void createWindow()
-  }
+  if (!showMainWindow()) void createWindow()
 })
 
 app.on('before-quit', () => {
