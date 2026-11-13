@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, ipcMain, net } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain, net, utilityProcess } = require('electron')
 const { spawn } = require('node:child_process')
 const fs = require('node:fs/promises')
 const http = require('node:http')
@@ -12,6 +12,8 @@ const allowedClients = new Map([
 ])
 
 let localServer
+let localServerFailure
+let localServerOutput = ''
 let localOrigin
 let mainWindow
 
@@ -27,10 +29,26 @@ function getFreePort() {
   })
 }
 
+function recordServerOutput(chunk) {
+  localServerOutput = `${localServerOutput}${chunk}`.slice(-4_000)
+}
+
+function serverStartError() {
+  const details = [localServerFailure, localServerOutput.trim()].filter(Boolean).join('\n')
+  return details
+    ? `The local Open Passage service did not start.\n\n${details}`
+    : 'The local Open Passage service did not start.'
+}
+
 function waitForServer(url, timeout = 20_000) {
   const started = Date.now()
   return new Promise((resolve, reject) => {
     const check = () => {
+      if (localServerFailure) {
+        reject(new Error(serverStartError()))
+        return
+      }
+
       const request = http.get(url, (response) => {
         response.resume()
         if (response.statusCode && response.statusCode < 500) {
@@ -44,8 +62,8 @@ function waitForServer(url, timeout = 20_000) {
     }
 
     const retry = () => {
-      if (Date.now() - started > timeout) {
-        reject(new Error('The local Open Passage service did not start.'))
+      if (localServerFailure || Date.now() - started > timeout) {
+        reject(new Error(serverStartError()))
         return
       }
       setTimeout(check, 200)
@@ -73,20 +91,29 @@ async function startLocalServer() {
   )
 
   localOrigin = `http://127.0.0.1:${port}`
-  localServer = spawn(process.execPath, [serverPath], {
+  localServerFailure = undefined
+  localServerOutput = ''
+  localServer = utilityProcess.fork(serverPath, [], {
+    cwd: path.dirname(serverPath),
     env: {
       ...process.env,
-      ELECTRON_RUN_AS_NODE: '1',
       HOSTNAME: '127.0.0.1',
       NODE_ENV: 'production',
       PORT: String(port),
     },
-    stdio: 'ignore',
+    serviceName: 'Open Passage Service',
+    stdio: 'pipe',
   })
 
+  localServer.stdout?.on('data', recordServerOutput)
+  localServer.stderr?.on('data', recordServerOutput)
+  localServer.once('error', (type, location) => {
+    localServerFailure = `${type} at ${location}`
+  })
   localServer.once('exit', (code) => {
-    if (code && code !== 0) {
-      console.error(`Open Passage local service exited with code ${code}`)
+    if (code !== 0) {
+      localServerFailure = `Open Passage local service exited with code ${code}.`
+      console.error(localServerFailure)
     }
   })
 
@@ -225,5 +252,5 @@ app.on('activate', () => {
 })
 
 app.on('before-quit', () => {
-  if (localServer && !localServer.killed) localServer.kill()
+  localServer?.kill()
 })
