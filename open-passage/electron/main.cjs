@@ -1,9 +1,10 @@
-const { app, BrowserWindow, dialog, ipcMain, net, utilityProcess } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain, net } = require('electron')
 const { spawn } = require('node:child_process')
 const fs = require('node:fs/promises')
 const http = require('node:http')
 const nodeNet = require('node:net')
 const path = require('node:path')
+const { pathToFileURL } = require('node:url')
 
 const isMac = process.platform === 'darwin'
 const allowedClients = new Map([
@@ -11,9 +12,6 @@ const allowedClients = new Map([
   ['OpenVPN Connect', 'OpenVPN Connect'],
 ])
 
-let localServer
-let localServerFailure
-let localServerOutput = ''
 let localOrigin
 let mainWindow
 
@@ -29,26 +27,10 @@ function getFreePort() {
   })
 }
 
-function recordServerOutput(chunk) {
-  localServerOutput = `${localServerOutput}${chunk}`.slice(-4_000)
-}
-
-function serverStartError() {
-  const details = [localServerFailure, localServerOutput.trim()].filter(Boolean).join('\n')
-  return details
-    ? `The local Open Passage service did not start.\n\n${details}`
-    : 'The local Open Passage service did not start.'
-}
-
 function waitForServer(url, timeout = 20_000) {
   const started = Date.now()
   return new Promise((resolve, reject) => {
     const check = () => {
-      if (localServerFailure) {
-        reject(new Error(serverStartError()))
-        return
-      }
-
       const request = http.get(url, (response) => {
         response.resume()
         if (response.statusCode && response.statusCode < 500) {
@@ -62,8 +44,8 @@ function waitForServer(url, timeout = 20_000) {
     }
 
     const retry = () => {
-      if (localServerFailure || Date.now() - started > timeout) {
-        reject(new Error(serverStartError()))
+      if (Date.now() - started > timeout) {
+        reject(new Error('The bundled Open Passage service timed out while starting.'))
         return
       }
       setTimeout(check, 200)
@@ -91,32 +73,11 @@ async function startLocalServer() {
   )
 
   localOrigin = `http://127.0.0.1:${port}`
-  localServerFailure = undefined
-  localServerOutput = ''
-  localServer = utilityProcess.fork(serverPath, [], {
-    cwd: path.dirname(serverPath),
-    env: {
-      ...process.env,
-      HOSTNAME: '127.0.0.1',
-      NODE_ENV: 'production',
-      PORT: String(port),
-    },
-    serviceName: 'Open Passage Service',
-    stdio: 'pipe',
-  })
+  process.env.HOSTNAME = '127.0.0.1'
+  process.env.NODE_ENV = 'production'
+  process.env.PORT = String(port)
 
-  localServer.stdout?.on('data', recordServerOutput)
-  localServer.stderr?.on('data', recordServerOutput)
-  localServer.once('error', (type, location) => {
-    localServerFailure = `${type} at ${location}`
-  })
-  localServer.once('exit', (code) => {
-    if (code !== 0) {
-      localServerFailure = `Open Passage local service exited with code ${code}.`
-      console.error(localServerFailure)
-    }
-  })
-
+  await import(pathToFileURL(serverPath).href)
   await waitForServer(localOrigin)
 }
 
@@ -249,8 +210,4 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (!showMainWindow()) void createWindow()
-})
-
-app.on('before-quit', () => {
-  localServer?.kill()
 })
